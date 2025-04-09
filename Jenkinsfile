@@ -10,14 +10,14 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "🔧 Construyendo imagen Docker..."
+                echo "Construyendo imagen Docker..."
                 bat "docker build -t %IMAGE_NAME%:%TAG% ."
             }
         }
 
         stage('Deploy') {
             steps {
-                echo "🚀 Desplegando imagen..."
+                echo "Desplegando imagen..."
                 bat '''
                     docker stop %CONTAINER_NAME% || echo No estaba corriendo
                     docker rm %CONTAINER_NAME% || echo Nada que borrar
@@ -29,10 +29,10 @@ pipeline {
 
     post {
         failure {
-            echo "❌ La construcción o el despliegue fallaron."
+            echo "La construcción o el despliegue fallaron."
         }
         success {
-            echo "✅ Despliegue exitoso de SICEI con tag ${TAG}"
+            echo "Despliegue exitoso de SICEI con tag ${TAG}"
         }
     }
 }
